@@ -1,0 +1,14 @@
+.summary {
+	padding: 64px 80px;
+	border: 6px solid #f2f3f5;
+	background-color: #fff;
+}
+
+h2.summary-title {
+	margin: 0 0 32px;
+}
+
+h2.summary-title._editing:hover,
+.summary-description._editing:hover {
+	border-color: #ffc83d;
+}

@@ -27,39 +27,9 @@ export default class ColumnsEditing extends Plugin {
 	_defineSchema() {
 		const schema = this.editor.model.schema;
 
-		schema.register( 'column', {
-			// Behaves like a self-contained object (e.g. an image).
+		schema.register( 'columns', {
 			isObject: true,
-
-			// Allow in places where other blocks are allowed (e.g. directly in the root).
 			allowWhere: '$block'
-		} );
-
-		schema.register( 'columnTitle', {
-			// Cannot be split or left by the caret.
-			isLimit: true,
-
-			allowIn: 'column',
-
-			// Allow content which is allowed in blocks (i.e. text with attributes).
-			allowContentOf: '$block'
-		} );
-
-		schema.register( 'columnDescription', {
-			// Cannot be split or left by the caret.
-			isLimit: true,
-
-			allowIn: 'column',
-
-			// Allow content which is allowed in the root (e.g. paragraphs).
-			allowContentOf: '$root'
-		} );
-
-		// ADDED
-		schema.addChildCheck( ( context, childDefinition ) => {
-			if ( context.endsWith( 'columnDescription' ) && childDefinition.name == 'columns' ) {
-				return false;
-			}
 		} );
 	}
 
@@ -88,58 +58,6 @@ export default class ColumnsEditing extends Plugin {
 				const section = viewWriter.createContainerElement( 'section', { class: 'column' } );
 
 				return toWidget( section, viewWriter, { label: 'simple column widget' } );
-			}
-		} );
-
-		conversion.for( 'upcast' ).elementToElement( {
-			model: 'columnTitle',
-			view: {
-				name: 'div',
-				classes: 'column-title'
-			}
-		} );
-
-		conversion.for( 'dataDowncast' ).elementToElement( {
-			model: 'columnTitle',
-			view: {
-				name: 'div',
-				classes: 'column-title'
-			}
-		} );
-
-		conversion.for( 'editingDowncast' ).elementToElement( {
-			model: 'columnTitle',
-			view: ( modelElement, viewWriter ) => {
-				// Note: You use a more specialized createEditableElement() method here.
-				const div = viewWriter.createEditableElement( 'div', { class: 'column-title' } );
-
-				return toWidgetEditable( div, viewWriter );
-			}
-		} );
-
-		conversion.for( 'upcast' ).elementToElement( {
-			model: 'columnDescription',
-			view: {
-				name: 'div',
-				classes: 'column-description'
-			}
-		} );
-
-		conversion.for( 'dataDowncast' ).elementToElement( {
-			model: 'columnDescription',
-			view: {
-				name: 'div',
-				classes: 'column-description'
-			}
-		} );
-
-		conversion.for( 'editingDowncast' ).elementToElement( {
-			model: 'columnDescription',
-			view: ( modelElement, viewWriter ) => {
-				// Note: You use a more specialized createEditableElement() method here.
-				const div = viewWriter.createEditableElement( 'div', { class: 'column-description' } );
-
-				return toWidgetEditable( div, viewWriter );
 			}
 		} );
 	}

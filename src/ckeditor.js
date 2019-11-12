@@ -31,7 +31,10 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 
+// ADDED PLUGINS
 import Columns from './blocks/columns/columns';
+import Simply from './blocks/simply/simply';
+import Summary from './blocks/summary/summary';
 
 export default class ClassicEditor extends ClassicEditorBase {
 }
@@ -62,7 +65,9 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	Alignment,
-	Columns
+	Columns,
+	Simply,
+	Summary
 ];
 
 // Editor configuration.
@@ -88,7 +93,9 @@ ClassicEditor.defaultConfig = {
 			'undo',
 			'redo',
 			'|',
-			'columns'
+			'columns',
+			'simply',
+			'summary'
 		]
 	},
 	image: {
