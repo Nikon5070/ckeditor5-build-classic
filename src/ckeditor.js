@@ -93,7 +93,6 @@ ClassicEditor.defaultConfig = {
 			'undo',
 			'redo',
 			'|',
-			'columns',
 			'simply',
 			'summary'
 		]
